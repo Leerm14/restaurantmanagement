@@ -18,7 +18,10 @@ const PaymentSuccess: React.FC = () => {
 
   useEffect(() => {
     const updatePaymentToFailed = async () => {
-      if (!orderId) return;
+      if (!orderId) {
+        setIsValidating(false);
+        return;
+      }
 
       try {
         const paymentRes = await apiClient.get(
@@ -32,6 +35,8 @@ const PaymentSuccess: React.FC = () => {
         }
       } catch (error) {
         console.error("Lỗi khi cập nhật trạng thái thanh toán:", error);
+      } finally {
+        setIsValidating(false);
       }
     };
 
@@ -40,25 +45,31 @@ const PaymentSuccess: React.FC = () => {
 
   const formatCurrency = (amount: string | null, vndAmount: boolean = true) => {
     if (!amount) return "0";
-    
+
     let locale = "vi-VN";
     let currency = "VND";
     let displayAmount = Number(amount);
-    
+
     if (language === "en") {
       locale = "en-US";
       currency = "USD";
-      displayAmount = vndAmount ? convertCurrency(Number(amount), "vi", "en") : Number(amount);
+      displayAmount = vndAmount
+        ? convertCurrency(Number(amount), "vi", "en")
+        : Number(amount);
     } else if (language === "zh") {
       locale = "zh-CN";
       currency = "CNY";
-      displayAmount = vndAmount ? convertCurrency(Number(amount), "vi", "zh") : Number(amount);
+      displayAmount = vndAmount
+        ? convertCurrency(Number(amount), "vi", "zh")
+        : Number(amount);
     } else if (language === "ja") {
       locale = "ja-JP";
       currency = "JPY";
-      displayAmount = vndAmount ? convertCurrency(Number(amount), "vi", "ja") : Number(amount);
+      displayAmount = vndAmount
+        ? convertCurrency(Number(amount), "vi", "ja")
+        : Number(amount);
     }
-    
+
     return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: currency,
