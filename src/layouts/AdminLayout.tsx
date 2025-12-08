@@ -1,7 +1,7 @@
 import React, { useState, ReactNode } from "react";
 import Headeradmin from "../components/Headeradmin";
 import Navadmin from "../components/Navadmin";
-import "./Adminlayout.css";
+import "./AdminLayout.css";
 
 interface AdminLayoutProps {
   children: ReactNode;
