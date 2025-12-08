@@ -1,0 +1,67 @@
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2670&q=80")
+    no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+.auth-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.auth-header .header {
+  background: transparent;
+  box-shadow: none;
+}
+
+.auth-header .nav-link {
+  color: #EAE0D5;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.auth-header .nav-link:hover {
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 8px;
+}
+
+.auth-header .account-button {
+  background: transparent;
+  color: #EAE0D5;
+  border: 1px solid #D4AF37;
+  backdrop-filter: blur(10px);
+}
+
+.auth-header .account-button:hover {
+  background: #D4AF37;
+  color: #181818;
+}
+
+.auth-header .logo img {
+  filter: brightness(1.2);
+}
+
+.auth-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Override header styles when in auth layout */
+@media (max-width: 768px) {
+  .auth-main {
+    padding-top: 70px;
+  }
+}
