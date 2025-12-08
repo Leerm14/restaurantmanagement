@@ -1,0 +1,234 @@
+.payment-result-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.payment-result-page.success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+.payment-result-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.payment-result-card {
+  background: white;
+  border-radius: 16px;
+  padding: 48px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  animation: scaleIn 0.5s ease-out;
+}
+
+.success-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.payment-result-card.failed .success-icon {
+  background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.result-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 12px 0;
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.result-message {
+  font-size: 16px;
+  color: #6c757d;
+  margin: 0 0 32px 0;
+  animation: fadeInUp 0.5s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.payment-details {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  text-align: left;
+  animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detail-row:first-child {
+  padding-top: 0;
+}
+
+.detail-label {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.detail-value {
+  font-size: 15px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.detail-value.amount {
+  color: #11998e;
+  font-size: 18px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  animation: fadeInUp 0.5s ease-out 0.5s both;
+}
+
+.payment-success-btn {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(17, 153, 142, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: #11998e;
+  border: 2px solid #11998e;
+}
+
+.btn-secondary:hover {
+  background: #11998e;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(17, 153, 142, 0.3);
+}
+
+/* Failed variant */
+.payment-result-card.failed .btn-primary {
+  background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+}
+
+.payment-result-card.failed .btn-primary:hover {
+  box-shadow: 0 8px 20px rgba(235, 51, 73, 0.4);
+}
+
+.payment-result-card.failed .btn-secondary {
+  color: #eb3349;
+  border-color: #eb3349;
+}
+
+.payment-result-card.failed .btn-secondary:hover {
+  background: #eb3349;
+  color: white;
+  box-shadow: 0 8px 20px rgba(235, 51, 73, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .payment-result-card {
+    padding: 32px 24px;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .success-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .result-title {
+    font-size: 24px;
+  }
+
+  .result-message {
+    font-size: 14px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .payment-success-btn {
+    width: 100%;
+  }
+
+  .payment-details {
+    padding: 16px;
+  }
+
+  .detail-label,
+  .detail-value {
+    font-size: 13px;
+  }
+
+  .detail-value.amount {
+    font-size: 16px;
+  }
+}

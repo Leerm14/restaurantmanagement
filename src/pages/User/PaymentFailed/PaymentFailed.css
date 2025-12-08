@@ -1,0 +1,43 @@
+/* Import từ PaymentSuccess.css */
+@import "../PaymentSuccess/PaymentSuccess.css";
+
+/* Thêm styles riêng cho trang thất bại */
+.error-info {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  text-align: left;
+  animation: fadeInUp 0.5s ease-out 0.5s both;
+}
+
+.error-suggestions {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #856404;
+}
+
+.error-suggestions strong {
+  color: #664d03;
+}
+
+.error-list {
+  margin: 0;
+  padding-left: 24px;
+  color: #856404;
+}
+
+.error-list li {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.error-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Override gradient cho failed page */
+.payment-result-page.failed {
+  background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+}
