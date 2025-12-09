@@ -498,31 +498,12 @@
 }
 
 .empty-state-text {
-  color: #FFFFFF;
+  color: #CCCCCC;
   margin-bottom: 30px;
-  font-size: 1.1rem;
-  font-weight: 500;
 }
 
 :root[data-theme="light"] .empty-state-text {
-  color: #181818;
-}
-
-.order-history-empty-state {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.order-history-empty-state p {
-  color: #FFFFFF;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0;
-  letter-spacing: 0.5px;
-}
-
-:root[data-theme="light"] .order-history-empty-state p {
-  color: #181818;
+  color: #555555;
 }
 
 .empty-state-btn {
