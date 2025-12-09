@@ -251,13 +251,13 @@
 
 .booking-form-group label {
   font-weight: 500;
-  color: white;
+  color: #2c3e50;
   margin-bottom: 8px;
   font-size: 0.95rem;
 }
 
 :root[data-theme="light"] .booking-form-group label {
-  color: white;
+  color: #333333;
 }
 
 .booking-form-group input,
