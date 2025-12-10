@@ -191,21 +191,6 @@ const AdminTables: React.FC = () => {
     setShowEditModal(true);
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Available":
-        return "#22c55e";
-      case "Booked":
-        return "#3b82f6";
-      case "Used":
-        return "#f59e0b";
-      case "Cleaning":
-        return "#ef4444";
-      default:
-        return "#6b7280";
-    }
-  };
-
   const getStatusText = (status: string) => {
     switch (status) {
       case "Available":
@@ -234,19 +219,19 @@ const AdminTables: React.FC = () => {
 
       {/* Thống kê */}
       <div className="table-stats">
-        <div className="stat-card" style={{ borderColor: "#22c55e" }}>
+        <div className="stat-card border-green-500">
           <h3>{stats.Available}</h3>
           <p>Bàn trống</p>
         </div>
-        <div className="stat-card" style={{ borderColor: "#3b82f6" }}>
+        <div className="stat-card border-blue-500">
           <h3>{stats.Booked}</h3>
           <p>Đã đặt</p>
         </div>
-        <div className="stat-card" style={{ borderColor: "#f59e0b" }}>
+        <div className="stat-card border-amber-500">
           <h3>{stats.Used}</h3>
           <p>Đang dùng</p>
         </div>
-        <div className="stat-card" style={{ borderColor: "#ef4444" }}>
+        <div className="stat-card border-red-500">
           <h3>{stats.Cleaning}</h3>
           <p>Dọn dẹp</p>
         </div>
@@ -275,14 +260,22 @@ const AdminTables: React.FC = () => {
           {tables.map((table) => (
             <div
               key={table.id}
-              className="table-card"
-              style={{ borderColor: getStatusColor(table.status) }}
+              className={`table-card ${
+                table.status === "Available" ? "border-green-500" :
+                table.status === "Booked" ? "border-blue-500" :
+                table.status === "Used" ? "border-amber-500" :
+                table.status === "Cleaning" ? "border-red-500" : "border-gray-500"
+              }`}
             >
               <div className="table-card-header">
                 <h3>Bàn số {table.tableNumber}</h3>
                 <span
-                  className="table-status"
-                  style={{ backgroundColor: getStatusColor(table.status) }}
+                  className={`table-status ${
+                    table.status === "Available" ? "bg-green-500" :
+                    table.status === "Booked" ? "bg-blue-500" :
+                    table.status === "Used" ? "bg-amber-500" :
+                    table.status === "Cleaning" ? "bg-red-500" : "bg-gray-500"
+                  }`}
                 >
                   {getStatusText(table.status)}
                 </span>

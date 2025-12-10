@@ -100,21 +100,6 @@ const StaffTables: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Available":
-        return "#22c55e";
-      case "Booked":
-        return "#3b82f6";
-      case "Used":
-        return "#f59e0b";
-      case "Cleaning":
-        return "#ef4444";
-      default:
-        return "#6b7280";
-    }
-  };
-
   const getStatusLabel = (status: string) => {
     switch (status) {
       case "Available":
@@ -205,8 +190,12 @@ const StaffTables: React.FC = () => {
           {tables.map((table) => (
             <div key={table.id} className="table-card">
               <div
-                className="table-number"
-                style={{ backgroundColor: getStatusColor(table.status) }}
+                className={`table-number ${
+                  table.status === "Available" ? "bg-green-500" :
+                  table.status === "Booked" ? "bg-blue-500" :
+                  table.status === "Used" ? "bg-amber-500" :
+                  table.status === "Cleaning" ? "bg-red-500" : "bg-gray-500"
+                }`}
               >
                 <i className="fas fa-utensils"></i>
                 <span>Bàn {table.tableNumber}</span>
@@ -217,8 +206,12 @@ const StaffTables: React.FC = () => {
                   <span>{table.capacity} người</span>
                 </div>
                 <div
-                  className="table-status"
-                  style={{ color: getStatusColor(table.status) }}
+                  className={`table-status ${
+                    table.status === "Available" ? "text-green-500" :
+                    table.status === "Booked" ? "text-blue-500" :
+                    table.status === "Used" ? "text-amber-500" :
+                    table.status === "Cleaning" ? "text-red-500" : "text-gray-500"
+                  }`}
                 >
                   <i className="fas fa-circle"></i>
                   <span>{getStatusLabel(table.status)}</span>
@@ -237,34 +230,19 @@ const StaffTables: React.FC = () => {
                     </option>
                   ))}
                 </select>
-                <div style={{ marginTop: "8px", display: "flex", gap: "8px" }}>
+                <div className="mt-2 flex gap-2">
                   <button
-                    className="btn-view-booking"
+                    className="btn-view-booking bg-purple-600 text-white px-3 py-2 border-none rounded-md cursor-pointer"
                     onClick={() => handleViewBookings(table.id)}
                     title="Xem lịch đặt bàn"
-                    style={{
-                      backgroundColor: "#8e44ad",
-                      color: "white",
-                      padding: "8px 12px",
-                      border: "none",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                    }}
                   >
                     <i className="fas fa-calendar-alt"></i> Lịch
                   </button>
 
                   <button
-                    className="btn-edit"
+                    className="btn-edit bg-gray-100 border border-gray-300 px-3 py-2 rounded-md cursor-pointer"
                     onClick={() => openEditModal(table)}
                     disabled={loading}
-                    style={{
-                      backgroundColor: "#f3f4f6",
-                      border: "1px solid #e5e7eb",
-                      padding: "8px 12px",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                    }}
                   >
                     Sửa
                   </button>
@@ -275,93 +253,60 @@ const StaffTables: React.FC = () => {
         </div>
         {showBookingModal && (
           <div
-            className="modal-overlay"
+            className="modal-overlay fixed inset-0 bg-black/40 flex justify-center items-center z-[9999]"
             onClick={() => setShowBookingModal(false)}
-            style={{
-              position: "fixed",
-              inset: 0,
-              background: "rgba(0,0,0,0.4)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              zIndex: 9999,
-            }}
           >
             <div
-              className="modal-content"
+              className="modal-content bg-white rounded-xl p-5 max-w-[700px] w-[95%]"
               onClick={(e) => e.stopPropagation()}
-              style={{
-                background: "white",
-                borderRadius: 12,
-                padding: 20,
-                maxWidth: 700,
-                width: "95%",
-              }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "20px",
-                }}
-              >
+              <div className="flex justify-between mb-5">
                 <h2>
                   Lịch đặt bàn (Table #
                   {tables.find((t) => t.id === currentTableId)?.tableNumber})
                 </h2>
                 <button
                   onClick={() => setShowBookingModal(false)}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    fontSize: "1.5rem",
-                    cursor: "pointer",
-                  }}
+                  className="bg-transparent border-none text-2xl cursor-pointer"
                 >
                   ×
                 </button>
               </div>
 
               {loadingBookings ? (
-                <div style={{ textAlign: "center", padding: "20px" }}>
+                <div className="text-center p-5">
                   Đang tải...
                 </div>
               ) : selectedTableBookings.length === 0 ? (
-                <div
-                  style={{
-                    textAlign: "center",
-                    padding: "20px",
-                    color: "#666",
-                  }}
-                >
+                <div className="text-center p-5 text-gray-600">
                   Không có lịch đặt nào cho bàn này.
                 </div>
               ) : (
-                <div style={{ overflowX: "auto" }}>
-                  <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
                     <thead>
-                      <tr style={{ background: "#f3f4f6", textAlign: "left" }}>
-                        <th style={{ padding: "10px" }}>Khách hàng</th>
-                        <th style={{ padding: "10px" }}>SĐT</th>
-                        <th style={{ padding: "10px" }}>Thời gian</th>
-                        <th style={{ padding: "10px" }}>Khách</th>
-                        <th style={{ padding: "10px" }}>Trạng thái</th>
-                        <th style={{ padding: "10px" }}>Thao tác</th>
+                      <tr className="bg-gray-100 text-left">
+                        <th className="p-2.5">Khách hàng</th>
+                        <th className="p-2.5">SĐT</th>
+                        <th className="p-2.5">Thời gian</th>
+                        <th className="p-2.5">Khách</th>
+                        <th className="p-2.5">Trạng thái</th>
+                        <th className="p-2.5">Thao tác</th>
                       </tr>
                     </thead>
                     <tbody>
                       {selectedTableBookings.map((booking) => (
                         <tr
                           key={booking.id}
-                          style={{ borderBottom: "1px solid #eee" }}
+                          className="border-b border-gray-200"
                         >
-                          <td style={{ padding: "10px" }}>
+                          <td className="p-2.5">
                             {booking.user?.fullName || "N/A"}
                           </td>
-                          <td style={{ padding: "10px" }}>
+                          <td className="p-2.5">
                             {booking.user?.phoneNumber || "N/A"}
                           </td>
-                          <td style={{ padding: "10px" }}>
+                          <td className="p-2.5">
                             {new Date(booking.bookingTime).toLocaleString(
                               "vi-VN",
                               {
@@ -372,47 +317,28 @@ const StaffTables: React.FC = () => {
                               }
                             )}
                           </td>
-                          <td style={{ padding: "10px" }}>
+                          <td className="p-2.5">
                             {booking.numGuests}
                           </td>
-                          <td style={{ padding: "10px" }}>
+                          <td className="p-2.5">
                             <span
-                              style={{
-                                padding: "4px 8px",
-                                borderRadius: "4px",
-                                fontSize: "0.85rem",
-                                backgroundColor:
-                                  booking.status === "Confirmed"
-                                    ? "#dbeafe"
-                                    : booking.status === "Completed"
-                                    ? "#d1fae5"
-                                    : "#f3f4f6",
-                                color:
-                                  booking.status === "Confirmed"
-                                    ? "#1e40af"
-                                    : booking.status === "Completed"
-                                    ? "#065f46"
-                                    : "#374151",
-                              }}
+                              className={`px-2 py-1 rounded text-xs ${
+                                booking.status === "Confirmed"
+                                  ? "bg-blue-100 text-blue-900"
+                                  : booking.status === "Completed"
+                                  ? "bg-green-100 text-green-800"
+                                  : "bg-gray-100 text-gray-800"
+                              }`}
                             >
                               {booking.status}
                             </span>
                           </td>
-                          <td style={{ padding: "10px" }}>
+                          <td className="p-2.5">
                             {(booking.status === "Confirmed" ||
                               booking.status === "Pending") && (
                               <button
                                 onClick={() => handleCheckInGuest(booking.id)}
-                                style={{
-                                  backgroundColor: "#27ae60",
-                                  color: "white",
-                                  border: "none",
-                                  padding: "6px 12px",
-                                  borderRadius: "4px",
-                                  cursor: "pointer",
-                                  fontWeight: "bold",
-                                  fontSize: "0.85rem",
-                                }}
+                                className="bg-green-600 text-white border-none px-3 py-1.5 rounded cursor-pointer font-bold text-xs"
                               >
                                 <i className="fas fa-check"></i> Check-in
                               </button>

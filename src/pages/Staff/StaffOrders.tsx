@@ -226,20 +226,7 @@ const StaffOrders: React.FC = () => {
           </h1>
 
           {pendingPayments.length > 0 && (
-            <div
-              style={{
-                backgroundColor: "#e74c3c",
-                color: "white",
-                padding: "12px 20px",
-                borderRadius: "8px",
-                marginTop: "15px",
-                animation: "pulse 2s infinite",
-                fontWeight: "bold",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
+            <div className="bg-red-500 text-white px-5 py-3 rounded-lg mt-4 animate-pulse font-bold flex items-center gap-2.5">
               <i className="fas fa-bell"></i>
               <span>
                 Có {pendingPayments.length} bàn đang gọi thanh toán! Vui lòng
@@ -258,7 +245,7 @@ const StaffOrders: React.FC = () => {
                   key={status.value}
                   className={`staff-status-btn ${
                     selectedStatus === status.value ? "active" : ""
-                  }`}
+                  } border-2`}
                   style={{
                     backgroundColor:
                       selectedStatus === status.value
@@ -312,8 +299,7 @@ const StaffOrders: React.FC = () => {
               </button>
               {searchValue && (
                 <button
-                  className="staff-btn-search"
-                  style={{ backgroundColor: "#6c757d", marginLeft: "10px" }}
+                  className="staff-btn-search bg-gray-600 ml-2.5"
                   onClick={() => {
                     setSearchValue("");
                     fetchOrdersByStatus(selectedStatus);
@@ -343,29 +329,16 @@ const StaffOrders: React.FC = () => {
               return (
                 <div
                   key={order.id}
-                  className="staff-order-card"
-                  style={
-                    paymentRequest
-                      ? {
-                          border: "2px solid #e74c3c",
-                          backgroundColor: "#fff5f5",
-                        }
-                      : {}
-                  }
+                  className={`staff-order-card ${
+                    paymentRequest ? "border-2 border-red-500 bg-red-50" : ""
+                  }`}
                 >
                   <div className="staff-order-header-card">
                     <div className="staff-order-info-main">
                       <h3>
                         <i className="fas fa-hashtag"></i> Đơn hàng #{order.id}
                         {paymentRequest && (
-                          <span
-                            style={{
-                              color: "#e74c3c",
-                              marginLeft: "10px",
-                              fontSize: "0.85rem",
-                              fontWeight: "bold",
-                            }}
-                          >
+                          <span className="text-red-500 ml-2.5 text-sm font-bold">
                             (KHÁCH GỌI TRẢ TIỀN)
                           </span>
                         )}
@@ -415,48 +388,19 @@ const StaffOrders: React.FC = () => {
                   </div>
 
                   {paymentRequest && (
-                    <div
-                      style={{
-                        margin: "15px 0",
-                        padding: "15px",
-                        backgroundColor: "#fff",
-                        border: "1px dashed #e74c3c",
-                        borderRadius: "8px",
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        flexWrap: "wrap",
-                        gap: "10px",
-                      }}
-                    >
+                    <div className="my-4 p-4 bg-white border border-dashed border-red-500 rounded-lg flex flex-row justify-between items-center flex-wrap gap-2.5">
                       <div>
-                        <p
-                          style={{
-                            fontWeight: "bold",
-                            color: "#c0392b",
-                            margin: 0,
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "5px",
-                          }}
-                        >
+                        <p className="font-bold text-red-700 m-0 flex items-center gap-1">
                           <i className="fas fa-money-bill-wave"></i> Yêu cầu
                           thanh toán:
                         </p>
-                        <p style={{ margin: "5px 0" }}>
+                        <p className="my-1">
                           Số tiền:{" "}
-                          <strong style={{ fontSize: "1.1rem" }}>
+                          <strong className="text-lg">
                             {formatPrice(paymentRequest.amount)}
                           </strong>
                         </p>
-                        <p
-                          style={{
-                            margin: 0,
-                            fontSize: "0.9rem",
-                            color: "#555",
-                          }}
-                        >
+                        <p className="m-0 text-sm text-gray-600">
                           Phương thức:{" "}
                           <strong>
                             {paymentRequest.paymentMethod === "Cash"
@@ -467,19 +411,7 @@ const StaffOrders: React.FC = () => {
                       </div>
                       <button
                         onClick={() => handleConfirmPayment(paymentRequest.id)}
-                        style={{
-                          backgroundColor: "#27ae60",
-                          color: "white",
-                          padding: "10px 20px",
-                          border: "none",
-                          borderRadius: "6px",
-                          cursor: "pointer",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                          fontWeight: "bold",
-                          boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-                        }}
+                        className="bg-green-600 text-white px-5 py-2.5 border-none rounded-md cursor-pointer flex items-center gap-2 font-bold shadow-sm"
                       >
                         <i className="fas fa-check-circle"></i> Xác nhận đã thu
                         tiền

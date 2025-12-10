@@ -528,15 +528,9 @@ const AdminMenuManagement: React.FC = () => {
           <div className="category-filters">
             <button
               className={`filter-btn ${
-                selectedCategory === "all" ? "active" : ""
-              }`}
+                selectedCategory === "all" ? "active bg-green-500 text-white" : "bg-transparent text-green-500"
+              } border-green-500`}
               onClick={() => setSelectedCategory("all")}
-              style={{
-                backgroundColor:
-                  selectedCategory === "all" ? "#4CAF50" : "transparent",
-                borderColor: "#4CAF50",
-                color: selectedCategory === "all" ? "white" : "#4CAF50",
-              }}
             >
               Tất cả danh mục
             </button>
@@ -763,16 +757,10 @@ const AdminMenuManagement: React.FC = () => {
                       id="fileUpload"
                       accept="image/*"
                       onChange={handleFileChange}
-                      style={{ marginTop: "10px" }}
+                      className="mt-2.5"
                     />
                     {newItem.file && (
-                      <small
-                        style={{
-                          color: "green",
-                          display: "block",
-                          marginTop: "5px",
-                        }}
-                      >
+                      <small className="text-green-600 block mt-1">
                         Đã chọn: {newItem.file.name}
                       </small>
                     )}
